@@ -1,0 +1,32 @@
+# Local PostgreSQL for development and tests.
+#
+# Only the database is containerised — the API itself runs on the host with
+# `npm run start:dev` so that the normal edit/reload loop stays fast.
+#
+#   docker compose up -d
+#   npm run db:migrate && npm run db:seed
+#
+# If you already run PostgreSQL locally, skip this file and point
+# DATABASE_URL at your own instance instead.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: rescue-rituals-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: rescue_rituals_events
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d rescue_rituals_events']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
