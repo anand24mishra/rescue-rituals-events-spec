@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Without an explicit rootDir, TypeScript infers it from the widest input
+    // path and emits to dist/src/main.js, which the start script does not
+    // expect. Pinning it keeps the entry point at dist/main.js.
+    "rootDir": "src",
+    // Kept inside the output directory so that Nest's `deleteOutDir` clears the
+    // incremental cache along with the output. Left at the project root, a
+    // stale cache convinces tsc that deleted output is still up to date and the
+    // build silently emits nothing.
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "frontend",
+    "test",
+    "scripts",
+    "prisma",
+    "**/*spec.ts"
+  ]
+}

@@ -1,0 +1,7 @@
+dist
+node_modules
+coverage
+frontend/dist
+frontend/node_modules
+openapi.json
+package-lock.json
