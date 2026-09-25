@@ -1,0 +1,108 @@
+/*
+ * Design tokens.
+ *
+ * Implements the palette, type scale, spacing, radii and motion contract.
+ *
+ * Two rules shape everything below:
+ *  - Colour is rationed. Roughly 70% warm neutral, 20% ink, 5–10% green,
+ *    2–5% terracotta. Green and terracotta carry meaning precisely because they
+ *    are rare.
+ *  - Borders do more work than shadows. There is one shadow in the whole
+ *    system, and it is for genuinely floating surfaces only.
+ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap');
+
+:root {
+  /* ---- Surfaces: warm neutral, never grey ---- */
+  --color-background: #f5f1e9;
+  --color-surface: #fffdf8;
+  --color-surface-muted: #ede8de;
+  --color-surface-sunken: #e7e1d5;
+
+  /* ---- Ink ---- */
+  --color-ink: #1c1f19;
+  --color-ink-secondary: #525750;
+  --color-ink-tertiary: #61665e;
+
+  /* ---- Green: the primary. Actions, confirmed state, meter fill ---- */
+  --color-primary: #2e5240;
+  --color-primary-hover: #22402f;
+  --color-primary-soft: #d8e6db;
+
+  /* ---- Terracotta: the accent. Event-type marks and editorial emphasis ---- */
+  --color-accent: #aa4d2e;
+  --color-accent-soft: #eedad1;
+
+  /* ---- State ---- */
+  --color-warning: #84541d;
+  --color-warning-soft: #eee0c7;
+  --color-success: #487050;
+  --color-success-soft: #d9e6db;
+  --color-danger: #a04840;
+  --color-danger-soft: #efd8d5;
+
+  --color-border: #dad5c9;
+  --color-border-strong: #bbb5a5;
+
+  /* ---- Type: Newsreader (editorial serif) & DM Sans (humanist sans) ---- */
+  --font-display: 'Newsreader', Garamond, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --text-micro: 0.6875rem; /* 11px — micro labels only */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-2xl: clamp(1.625rem, 1.4rem + 1vw, 2.25rem);
+  --text-3xl: clamp(2rem, 1.6rem + 1.9vw, 3rem);
+  --text-display: clamp(2.75rem, 2rem + 3.6vw, 5rem);
+
+  /* ---- Space: base-4 ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---- Radius: restrained. Pills are for dots and tags only ---- */
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-card: 0 1px 3px rgba(28, 31, 25, 0.04), 0 4px 12px rgba(28, 31, 25, 0.05);
+  --shadow-floating: 0 8px 30px rgba(28, 31, 25, 0.08);
+  --shadow-dialog: 0 24px 60px rgba(28, 31, 25, 0.18);
+
+  /* ---- Motion ---- */
+  --duration-micro: 140ms;
+  --duration-standard: 220ms;
+  --duration-entrance: 380ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ---- Layout ---- */
+  --content-width: 1180px;
+  --content-width-wide: 1320px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --measure: 68ch;
+
+  /* Editorial placeholder colours per event type */
+  --block-adoption: #3f6350;
+  --block-fair: #b8603f;
+  --block-foster: #8a6a3a;
+  --block-volunteer: #4a5f6e;
+  --block-meetup: #6b5b7b;
+  --block-other: #5c6157;
+}

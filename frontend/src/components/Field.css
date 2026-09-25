@@ -1,0 +1,114 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.field__hint {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+  line-height: 1.45;
+}
+
+.field__control {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  /* 4px for inputs (§8). */
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: var(--text-md);
+  transition:
+    border-color var(--duration-micro) var(--ease-out),
+    box-shadow var(--duration-micro) var(--ease-out);
+}
+
+.field__control::placeholder {
+  color: var(--color-ink-tertiary);
+}
+
+.field__control:hover:not(:disabled) {
+  border-color: var(--color-ink-tertiary);
+}
+
+.field__control:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.field__control:disabled {
+  background: var(--color-surface-muted);
+  cursor: not-allowed;
+}
+
+.field__control--area {
+  min-height: 8rem;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.field[data-invalid='true'] .field__control {
+  border-color: var(--color-danger);
+}
+
+.field[data-invalid='true'] .field__control:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-danger-soft);
+}
+
+/* The error sits under the field it belongs to and says what is wrong, not
+   "invalid input" (§23.2). */
+.field__error {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-danger);
+}
+
+.field__select-wrap {
+  position: relative;
+  display: flex;
+}
+
+.field__select-wrap select {
+  appearance: none;
+  padding-right: var(--space-10);
+  cursor: pointer;
+}
+
+.field__chevron {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--color-ink-tertiary);
+}
+
+/* ---- Checkbox ----------------------------------------------------------- */
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.checkbox__input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.checkbox__label {
+  font-size: var(--text-md);
+  font-weight: 500;
+  cursor: pointer;
+}

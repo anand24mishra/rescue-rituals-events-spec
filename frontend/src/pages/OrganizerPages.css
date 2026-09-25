@@ -1,0 +1,235 @@
+/*
+ * A real tabular structure for attendee and event management (§21, §37): rows
+ * scan far better than cards when the job is comparing numbers down a column.
+ *
+ * Built from a grid rather than a <table> so the same markup can restack into
+ * labelled blocks on mobile (§31.1). ARIA roles carry the table semantics that
+ * the elements no longer imply.
+ */
+.org-table {
+  margin-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.org-table__head {
+  display: none;
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.org-table__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--duration-micro) var(--ease-out);
+}
+
+.org-table__row:hover {
+  background: var(--color-surface);
+}
+
+@media (min-width: 768px) {
+  .org-table__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 9rem 7rem 7rem;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .org-table__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 9rem 7rem 7rem;
+    gap: var(--space-4);
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.org-table__cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  min-width: 0;
+}
+
+.org-table__cell--main {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.org-table__cell--number {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .org-table__cell--number {
+    justify-content: flex-start;
+  }
+}
+
+.org-table__title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.org-table__meta {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+/* On mobile each cell labels itself, since there is no header row to refer to. */
+.org-table__label {
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+  min-width: 5.5rem;
+}
+
+@media (min-width: 768px) {
+  .org-table__label {
+    display: none;
+  }
+}
+
+/* ---- Metric row (§21) ---------------------------------------------------
+ * Four numbers, stated plainly. No charts: there is nothing here a chart would
+ * explain better than the number itself.
+ */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  padding: var(--space-6) 0;
+  margin-bottom: var(--space-8);
+  border-block: 1px solid var(--color-border);
+}
+
+@media (min-width: 640px) {
+  .metrics {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metric__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric__label {
+  display: block;
+  margin-top: var(--space-2);
+}
+
+/* ---- Attendee table ----------------------------------------------------- */
+.attendee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-4);
+}
+
+.attendee-table caption {
+  text-align: left;
+  padding-bottom: var(--space-3);
+}
+
+.attendee-table th {
+  text-align: left;
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.attendee-table td {
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+
+.attendee-table__position {
+  width: 3.5rem;
+  color: var(--color-ink-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.attendee-table__name {
+  font-weight: 500;
+}
+
+.org-section {
+  margin-top: var(--space-12);
+}
+
+.org-section__heading {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: -0.015em;
+  margin-bottom: var(--space-2);
+}
+
+.org-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.org-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.org-privacy {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+.organizer { padding-top:40px; }
+.org-list-caption { display:flex; justify-content:space-between; gap:16px; margin-bottom:12px; }
+.org-list-caption p { font-family:var(--font-display); font-size:1.375rem; }.org-list-caption > span { font-size:.875rem; color:var(--color-ink-secondary); }
+.org-results[data-fetching='true'] { opacity:.55; pointer-events:none; }
+.events-table { width:100%; border-collapse:collapse; }
+.events-table th { text-align:left; font-size:.75rem; font-weight:500; color:var(--color-ink-secondary); padding:14px 16px; border-bottom:1px solid var(--color-border); }
+.events-table td { padding:24px 16px; border-bottom:1px solid var(--color-border); }
+.events-table tr:hover td { background:var(--color-surface); }
+.events-table td:first-child { padding-left:0; }.events-table td:last-child { padding-right:0; width:40px; color:var(--color-primary); }
+.org-event-name { display:flex; align-items:center; gap:18px; }.org-event-name > div { min-width:0; }
+.org-event-icon { width:48px; height:48px; border:1px solid var(--color-border); border-radius:8px; display:grid; place-items:center; flex-shrink:0; color:var(--color-ink-secondary); }
+.org-table__title { font-size:1.25rem; text-decoration:none; }.org-table__title:hover { color:var(--color-primary); text-decoration:underline; }
+.org-table__meta { margin-top:5px; }.org-attendance { font-variant-numeric:tabular-nums; font-weight:600; font-size:.9375rem; }.org-attendance > span { font-weight:400; color:var(--color-ink-secondary); font-size:.8125rem; }
+.org-capacity-track { display:block; width:120px; height:3px; background:var(--color-surface-sunken); margin-top:9px; }.org-capacity-track > span { display:block; height:100%; background:var(--color-primary); }
+.org-detail-head { display:flex; align-items:start; justify-content:space-between; gap:24px; margin-bottom:28px; }.org-detail-head .page__title { font-size:2.5rem; }.org-detail-head .org-actions { margin:0; flex-shrink:0; }
+.metrics { margin-top:28px; }.metric__value { margin:0; }.metric__label { font-size:.8125rem; text-transform:none; letter-spacing:0; }
+.danger-zone { margin-top:48px; padding-top:24px; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; align-items:center; gap:24px; }
+.danger-zone h2 { font-family:var(--font-sans); font-size:1rem; letter-spacing:0; }.danger-zone p { margin-top:6px; font-size:.875rem; color:var(--color-ink-secondary); }
+.attendee-table td,.attendee-table th { overflow-wrap:anywhere; }.attendee-table th { font-size:.75rem; }.org-detail .view-tabs { margin-top:32px; }
+@media(max-width:767px) { .events-table thead { display:none; }.events-table,.events-table tbody { display:block; }.events-table tr { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:14px 18px; padding:22px 0; border-bottom:1px solid var(--color-border); }.events-table td { border:0; padding:0; }.events-table td:first-child { grid-column:1/-1; }.events-table td:last-child { display:none; }.org-event-icon { display:none; }.org-capacity-track { width:100%; }.org-detail-head { display:block; }.org-detail-head .org-actions { margin-top:20px; }.org-detail-head .page__title { font-size:2rem; }.danger-zone { align-items:start; flex-direction:column; } }

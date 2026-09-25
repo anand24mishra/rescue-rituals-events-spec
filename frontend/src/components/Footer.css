@@ -1,0 +1,64 @@
+.footer {
+  margin-top: var(--space-24);
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-10) var(--space-8);
+  background: var(--color-surface-muted);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.footer__wordmark span {
+  color: var(--color-accent);
+}
+
+.footer__tagline {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+  font-style: italic;
+}
+
+.footer__note {
+  color: var(--color-ink-tertiary);
+  font-size: var(--text-xs);
+  line-height: 1.55;
+  align-self: center;
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.footer__links a {
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-out);
+}
+
+.footer__links a:hover {
+  color: var(--color-primary);
+}

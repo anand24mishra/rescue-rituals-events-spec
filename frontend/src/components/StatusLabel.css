@@ -1,0 +1,33 @@
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--status-color, var(--color-ink-secondary));
+  white-space: nowrap;
+}
+
+.status__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.status--primary {
+  --status-color: var(--color-primary);
+}
+
+.status--success {
+  --status-color: var(--color-success);
+}
+
+.status--warning {
+  --status-color: var(--color-warning);
+}
+
+.status--danger {
+  --status-color: var(--color-danger);
+}

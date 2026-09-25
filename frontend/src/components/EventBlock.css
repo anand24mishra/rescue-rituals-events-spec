@@ -1,0 +1,76 @@
+.event-block {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-none);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--color-surface-muted);
+}
+
+.event-block--sm {
+  aspect-ratio: 3 / 2;
+}
+
+.event-block--lg {
+  aspect-ratio: 16 / 10;
+}
+
+/* The actual photograph */
+.event-block__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform-origin: center center;
+
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+/* Subtle, atmospheric scrim */
+.event-block__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(28, 31, 25, 0.3) 0%,
+    rgba(28, 31, 25, 0.05) 50%,
+    rgba(28, 31, 25, 0.4) 100%
+  );
+  pointer-events: none;
+}
+
+/* Elegant pill badge positioned cleanly at top-left */
+.event-block__pill-badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(255, 253, 248, 0.94);
+
+
+  color: var(--color-ink);
+  border: 1px solid rgba(218, 213, 201, 0.8);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Hover: subtle zoom on image inside card */
+.event-card:hover .event-block__img,
+.featured:hover .event-block__img {
+  transform: scale(1.035);
+}
+
+.event-block__scrim { display:none; }
+.event-block__pill-badge { box-shadow:none; background:var(--color-surface); font-size:.75rem; text-transform:none; letter-spacing:0; }
+@media(prefers-reduced-motion:reduce) { .event-card:hover .event-block__img,.featured:hover .event-block__img { transform:none; } }

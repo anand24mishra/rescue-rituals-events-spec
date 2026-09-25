@@ -1,0 +1,22 @@
+.detail { padding-top:28px; }
+.detail__layout { display:grid; grid-template-columns:minmax(0,1fr) 340px; grid-template-areas:'intro attendance' 'image attendance' 'about attendance'; gap:32px 56px; align-items:start; }
+.detail__intro { grid-area:intro; }
+.detail__title { font-size:3rem; line-height:1.07; font-weight:500; margin-top:10px; }
+.detail__facts { display:grid; gap:12px; margin-top:24px; }
+.detail__facts > div { display:flex; align-items:flex-start; gap:12px; }
+.detail__facts dt { padding-top:3px; color:var(--color-ink-secondary); flex-shrink:0; }
+.detail__facts dd { font-size:1rem; }
+.detail__relative { margin-left:10px; color:var(--color-ink-secondary); font-size:.875rem; }
+.detail__zone { color:var(--color-ink-secondary); }
+.detail__host { margin-top:18px; font-size:.875rem; color:var(--color-ink-secondary); }
+.detail__host strong { color:var(--color-ink); font-weight:500; }
+.detail__rail { grid-area:attendance; position:sticky; top:96px; padding-top:12px; }
+.detail__visual { grid-area:image; }
+.detail__visual .event-block { aspect-ratio:16/10; border-radius:12px; }
+.detail__content { grid-area:about; border-top:1px solid var(--color-border); padding-top:28px; }
+.detail__content h2 { font-size:1.75rem; font-weight:500; margin-bottom:18px; }
+.detail__content p { color:var(--color-ink-secondary); line-height:1.75; max-width:65ch; margin-bottom:16px; }
+.detail__manage { margin-top:20px; padding-top:20px; border-top:1px solid var(--color-border); }
+.detail__manage p { margin-bottom:12px; color:var(--color-ink-secondary); font-size:.875rem; }
+@media(max-width:900px) { .detail__layout { grid-template-columns:minmax(0,1fr) 300px; gap:28px; } .detail__title { font-size:2.5rem; } }
+@media(max-width:700px) { .detail__layout { grid-template-columns:1fr; grid-template-areas:'intro' 'attendance' 'image' 'about'; gap:24px; } .detail__rail { position:static; padding:0; } .detail__title { font-size:2.125rem; } .detail__relative { display:block; margin:2px 0 0; } .detail__facts { margin-top:20px; } .detail__visual .event-block { aspect-ratio:16/9; } }

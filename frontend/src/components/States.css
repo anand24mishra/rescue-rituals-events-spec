@@ -1,0 +1,146 @@
+.event-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+}
+
+/* ---- Skeletons ---------------------------------------------------------- */
+.skeleton-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.skeleton-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.skeleton {
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* A single sweep, slow enough to read as "waiting" rather than "flashing". */
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 253, 248, 0.6),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: skeleton-sweep 1.5s var(--ease-out) infinite;
+}
+
+@keyframes skeleton-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    display: none;
+  }
+}
+
+.skeleton--block {
+  aspect-ratio: 5 / 3;
+  border-radius: 0;
+}
+
+.skeleton--label {
+  width: 6rem;
+  height: 0.7rem;
+}
+
+.skeleton--title {
+  width: 85%;
+  height: 1.4rem;
+}
+
+.skeleton--heading {
+  width: 90%;
+  height: 2.6rem;
+}
+
+.skeleton--line {
+  width: 100%;
+  height: 0.8rem;
+}
+
+.skeleton--short {
+  width: 55%;
+}
+
+.skeleton--meter {
+  width: 100%;
+  height: 4rem;
+  margin-top: var(--space-4);
+}
+
+.detail-skeleton {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .detail-skeleton {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+.detail-skeleton__visual {
+  aspect-ratio: 4 / 3;
+}
+
+.detail-skeleton__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ---- Empty / error ------------------------------------------------------
+ * These sit on the page background with a single dashed rule, rather than
+ * inside another card (§2.4).
+ */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 46ch;
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.state__title {
+  font-size: var(--text-xl);
+}
+
+.state__body {
+  color: var(--color-ink-secondary);
+}
+
+.state--error {
+  border-top-color: var(--color-danger);
+}
+
+.state__reference {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+.state__reference code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+}

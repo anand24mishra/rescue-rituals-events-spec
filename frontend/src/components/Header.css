@@ -1,0 +1,216 @@
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-background);
+  transition:
+    background var(--duration-standard) var(--ease-out),
+    border-color var(--duration-standard) var(--ease-out),
+    box-shadow var(--duration-standard) var(--ease-out);
+}
+
+.masthead--scrolled {
+  background: var(--color-background);
+  box-shadow: 0 2px 20px rgba(32, 35, 29, 0.07);
+  border-color: var(--color-border-strong);
+}
+
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: 68px;
+}
+
+/* ---- Wordmark ----------------------------------------------------------- */
+.wordmark {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--color-ink);
+  flex-shrink: 0;
+  transition: opacity var(--duration-micro) var(--ease-out);
+}
+
+.wordmark:hover {
+  opacity: 0.8;
+}
+
+/* One accent, on one word. The restraint is the point. */
+.wordmark__second {
+  color: var(--color-accent);
+}
+
+/* ---- Nav ---------------------------------------------------------------- */
+.masthead__nav {
+  display: none;
+  gap: var(--space-5);
+}
+
+@media (min-width: 860px) {
+  .masthead__nav {
+    display: flex;
+  }
+}
+
+.nav-link {
+  position: relative;
+  padding-block: var(--space-2);
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--duration-micro) var(--ease-out);
+}
+
+.nav-link:hover {
+  color: var(--color-ink);
+}
+
+/* A 1.5px underline marks the active route. */
+.nav-link.active {
+  color: var(--color-ink);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--color-primary);
+  border-radius: 1px;
+}
+
+/* Hover underline slide effect */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--color-primary);
+  border-radius: 1px;
+  transition: right var(--duration-standard) var(--ease-out);
+  opacity: 0.4;
+}
+
+.nav-link:hover:not(.active)::before {
+  right: 0;
+}
+
+.masthead__actions {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+@media (min-width: 860px) {
+  .masthead__actions {
+    display: flex;
+  }
+}
+
+.masthead__user-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.masthead__who {
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.masthead__role-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.04em;
+}
+
+/* ---- Mobile ------------------------------------------------------------- */
+.masthead__toggle {
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  /* 44px, the minimum touch target. */
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-micro) var(--ease-out),
+    border-color var(--duration-micro) var(--ease-out);
+}
+
+.masthead__toggle:hover {
+  background: var(--color-surface-muted);
+  border-color: var(--color-border-strong);
+}
+
+@media (min-width: 860px) {
+  .masthead__toggle {
+    display: none;
+  }
+}
+
+.masthead__mobile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--gutter) var(--space-6);
+  border-top: 1px solid var(--color-border);
+  background: rgba(255, 253, 248, 0.98);
+}
+
+.masthead__mobile[hidden] {
+  display: none;
+}
+
+@media (min-width: 860px) {
+  .masthead__mobile {
+    display: none;
+  }
+}
+
+.masthead__mobile-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.masthead__mobile-nav .nav-link {
+  padding-block: var(--space-3);
+  font-size: var(--text-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.masthead__mobile-nav .nav-link.active::after {
+  display: none;
+}
+
+.masthead__mobile-actions {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.wordmark { font-size:1.4rem; }
+.masthead__inner { gap:40px; }
+.nav-link { min-height:44px; display:inline-flex; align-items:center; }
