@@ -15,9 +15,6 @@ export function Footer() {
         <nav className="footer__links" aria-label="Footer">
           <Link to="/events">Events</Link>
           <Link to="/my-rsvps">My RSVPs</Link>
-          <a href="/docs" target="_blank" rel="noreferrer">
-            API docs
-          </a>
         </nav>
 
         <p className="footer__note">
