@@ -151,6 +151,96 @@ const EVENTS = [
     capacity: null,
     waitlistEnabled: true,
   },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000007',
+    title: 'Kitten Socialisation Morning',
+    description:
+      'Help shy kittens become confident, adoptable cats. Gentle handling ' +
+      'practice and play sessions — no experience required, just patience.',
+    eventType: EventType.VOLUNTEER_EVENT,
+    status: EventStatus.PUBLISHED,
+    location: 'Hoboken, NJ',
+    startsAt: hoursFromNow(160),
+    endsAt: hoursFromNow(163),
+    timezone: 'America/New_York',
+    capacity: 12,
+    waitlistEnabled: true,
+  },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000008',
+    title: 'Senior Pet Adoption Day',
+    description:
+      'Older animals deserve love too. Meet sweet senior dogs and cats whose ' +
+      'only fault is having been overlooked. Reduced adoption fees all day.',
+    eventType: EventType.ADOPTION_EVENT,
+    status: EventStatus.PUBLISHED,
+    location: 'Astoria, NY',
+    startsAt: hoursFromNow(240),
+    endsAt: hoursFromNow(246),
+    timezone: 'America/New_York',
+    capacity: 80,
+    waitlistEnabled: true,
+  },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000009',
+    title: 'Rescue Transport Run Briefing',
+    description:
+      'Monthly coordination session for volunteer drivers. Route planning, ' +
+      'animal comfort protocols, and reviewing paperwork requirements.',
+    eventType: EventType.VOLUNTEER_EVENT,
+    status: EventStatus.PUBLISHED,
+    location: 'Stamford, CT',
+    startsAt: hoursFromNow(350),
+    endsAt: hoursFromNow(352),
+    timezone: 'America/New_York',
+    capacity: 20,
+    waitlistEnabled: false,
+  },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000010',
+    title: 'Paws in the Park Festival',
+    description:
+      'An outdoor festival with rescue booths, agility demos, pet portraits ' +
+      'and a silent auction. All proceeds fund emergency veterinary care.',
+    eventType: EventType.RESCUE_FAIR,
+    status: EventStatus.PUBLISHED,
+    location: 'Prospect Park, Brooklyn, NY',
+    startsAt: hoursFromNow(500),
+    endsAt: hoursFromNow(508),
+    timezone: 'America/New_York',
+    capacity: 200,
+    waitlistEnabled: true,
+  },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000011',
+    title: 'Foster Family Potluck',
+    description:
+      'Bring a dish and your foster stories. A casual evening for current ' +
+      'and alumni fosters to share tips, celebrate successes, and recharge.',
+    eventType: EventType.COMMUNITY_MEETUP,
+    status: EventStatus.PUBLISHED,
+    location: 'Park Slope, Brooklyn, NY',
+    startsAt: hoursFromNow(180),
+    endsAt: hoursFromNow(184),
+    timezone: 'America/New_York',
+    capacity: 30,
+    waitlistEnabled: true,
+  },
+  {
+    id: 'aaaaaaaa-0000-4000-8000-000000000012',
+    title: 'Emergency First Aid for Rescues',
+    description:
+      'A hands-on workshop covering wound care, dehydration assessment, ' +
+      'and safe transport of injured animals until veterinary help arrives.',
+    eventType: EventType.FOSTER_WORKSHOP,
+    status: EventStatus.PUBLISHED,
+    location: 'Upper West Side, Manhattan, NY',
+    startsAt: hoursFromNow(420),
+    endsAt: hoursFromNow(424),
+    timezone: 'America/New_York',
+    capacity: 15,
+    waitlistEnabled: true,
+  },
 ] as const;
 
 async function main(): Promise<void> {

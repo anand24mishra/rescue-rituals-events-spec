@@ -9,8 +9,12 @@
  *    are rare.
  *  - Borders do more work than shadows. There is one shadow in the whole
  *    system, and it is for genuinely floating surfaces only.
+ *
+ * NOTE: Fonts (DM Sans + Newsreader) are loaded via <link> in index.html.
+ * Using @import url() here would break in production builds because Vite
+ * concatenates CSS files and the @import ends up mid-file, which browsers
+ * ignore per the CSS spec.
  */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&display=swap');
 
 :root {
   /* ---- Surfaces: warm neutral, never grey ---- */
