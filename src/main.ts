@@ -48,7 +48,8 @@ async function bootstrap(): Promise<void> {
 
   app.enableCors({
     origin: (requestOrigin, callback) => {
-      const isWildcardAllowed = config.corsOrigins.includes('*') && !isProduction;
+      const isWildcardAllowed =
+        config.corsOrigins.includes('*') && !isProduction;
       if (
         !requestOrigin ||
         isWildcardAllowed ||
