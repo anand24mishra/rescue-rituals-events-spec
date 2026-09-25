@@ -47,10 +47,19 @@ async function bootstrap(): Promise<void> {
   app.useBodyParser('urlencoded', { limit: BODY_LIMIT, extended: true });
 
   app.enableCors({
-    origin:
-      config.corsOrigins.includes('*') && !isProduction
-        ? true
-        : config.corsOrigins,
+    origin: (requestOrigin, callback) => {
+      const isWildcardAllowed = config.corsOrigins.includes('*') && !isProduction;
+      if (
+        !requestOrigin ||
+        isWildcardAllowed ||
+        config.corsOrigins.includes(requestOrigin) ||
+        requestOrigin.endsWith('.vercel.app')
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: [
       'Content-Type',
