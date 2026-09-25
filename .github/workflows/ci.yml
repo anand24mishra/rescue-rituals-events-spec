@@ -1,0 +1,116 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A new push to the same branch makes an in-flight run obsolete.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  api:
+    name: API — lint, test, build
+    runs-on: ubuntu-latest
+
+    # A real PostgreSQL, not a mock. The headline behaviour of this service is
+    # that concurrent RSVPs cannot exceed capacity, and that claim rests on row
+    # locking and CHECK constraints — neither of which a mock can exercise. A CI
+    # run without a database would verify everything except the part that
+    # matters.
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: rescue_rituals_events_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/rescue_rituals_events_test?schema=public&connection_limit=30&pool_timeout=20
+      JWT_SECRET: ci-only-secret-value-that-is-long-enough-32
+      JWT_EXPIRES_IN: 1h
+      CORS_ORIGIN: http://localhost:5173
+      LOG_LEVEL: silent
+      # Relaxed so the suite is not fighting a safeguard; the dedicated
+      # rate-limit spec boots its own app with deliberately tiny limits.
+      THROTTLE_LIMIT: '100000'
+      AUTH_THROTTLE_LIMIT: '100000'
+      RSVP_THROTTLE_LIMIT: '100000'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Apply migrations
+        # `migrate deploy`, never `db push`: this is the same command production
+        # uses, so CI verifies the migrations themselves and not just the schema.
+        run: npx prisma migrate deploy
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Integration and concurrency tests
+        run: npx jest --config jest.e2e.config.js --runInBand
+
+      - name: Build
+        run: npm run build
+
+
+      - name: Confirm no .env file was committed
+        run: |
+          if git ls-files --error-unmatch .env 2>/dev/null; then
+            echo "::error::.env is tracked by git. Remove it and rotate anything it contained."
+            exit 1
+          fi
+          echo "No .env in the repository."
+
+  web:
+    name: Frontend — lint, typecheck, build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
